@@ -22,14 +22,14 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
     # drop the original categories column from `df`
-    df=df.drop(columns=['categories'])
+    df=df.drop(['categories'],axis=1)
     # concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df,categories],axis=1,join='inner')
     # check number of duplicates
     df["is_duplicate"]=df.duplicated(keep='first')
     # drop duplicates
     df=df[df["is_duplicate"]==False]
-    df.drop(columns=['is_duplicate'])
+    df=df.drop(['is_duplicate'],axis=1)
     return df
 
 
